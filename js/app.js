@@ -1,39 +1,39 @@
 // Enemies our player must avoid
 const Enemy = function(x, y) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    this.speed = Math.round(Math.random() * 3) + 1;
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
+  // Variables applied to each of our instances go here,
+  // we've provided one for you to get started
+  this.speed = Math.round(Math.random() * 3) + 1;
+  // The image/sprite for our enemies, this uses
+  // a helper we've provided to easily load images
+  this.sprite = 'images/enemy-bug.png';
+  this.x = x;
+  this.y = y;
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    this.x = (this.x + this.speed + dt * 10) % 500;
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    // Checks for collision between player and enemies
-    if (player.x < this.x + 60 &&
-        player.x + 60 > this.x &&
-        player.y < this.y + 40 &&
-        40 + player.y > this.y) {
-        player.x = 202;
-        player.y = 375;
-    };
+  this.x = (this.x + this.speed + dt * 10) % 500;
+  // You should multiply any movement by the dt parameter
+  // which will ensure the game runs at the same speed for
+  // all computers.
+  // Checks for collision between player and enemies
+  if (player.x < this.x + 60 &&
+    player.x + 60 > this.x &&
+    player.y < this.y + 40 &&
+    40 + player.y > this.y) {
+    player.x = 202;
+    player.y = 375;
+  };
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Enemy.prototype.reset = function() {
-    this.speed = Math.round(Math.random() * 3) + 1;
+  this.speed = Math.round(Math.random() * 3) + 1;
 }
 
 // Now write your own player class
@@ -80,12 +80,12 @@ let player = new Player(202, 375);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    const allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-    };
+  const allowedKeys = {
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
+  };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+  player.handleInput(allowedKeys[e.keyCode]);
 });
