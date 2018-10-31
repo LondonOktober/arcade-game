@@ -1,3 +1,99 @@
 body {
-    text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+}
+
+#startModal {
+  background-color: #4A985B;
+  border: 5px dashed #3E6F3F;
+  bottom: 1;
+  color: #3E6F3F;
+  height: 600px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 20px;
+  width: 495px;
+  z-index: 1;
+}
+
+#winModal {
+  background-color: white;
+  border: 5px dashed green;
+  bottom: 0;
+  display: none;
+  height: 200px;
+  left: 0;
+  margin: auto;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 400px;
+  z-index: 1;
+}
+
+#loseModal {
+  background-color: white;
+  border: 5px dashed red;
+  bottom: 0;
+  display: none;
+  height: 200px;
+  left: 0;
+  margin: auto;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 400px;
+  z-index: 1;
+}
+
+#startModalContent {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 30px;
+  padding-top: 50px;
+}
+
+#winModalContent {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 30px;
+  padding-top: 50px;
+}
+
+#loseModalContent {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 30px;
+  padding-top: 50px;
+}
+
+.btn {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1em;
+}
+
+.exit {
+  border-color: #3E6F3F;
+  color: #3E6F3F;
+}
+
+.exit:hover {
+  background-color: #3E6F3F;
+  color: white;
+}
+
+/* Green */
+.success {
+  border-color: #208914;
+  color: #208914;
+}
+
+.success:hover {
+  background-color: #208914;
+  color: white;
 }

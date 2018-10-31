@@ -1,3 +1,9 @@
+let collision = 0;
+let heartOne = document.getElementById('heart1');
+let heartTwo = document.getElementById('heart2');
+let heartThree = document.getElementById('heart3');
+let win = 0;
+
 // Enemies our player must avoid
 const Enemy = function(x, y) {
   // Variables applied to each of our instances go here,
@@ -24,13 +30,32 @@ Enemy.prototype.update = function(dt) {
     40 + player.y > this.y) {
     player.x = 202;
     player.y = 375;
-  };
+    collision++;
+    lives();
+  }
+
+  function lives() {
+    if (collision === 1) {
+      heartOne.style.visibility = "hidden";
+    }
+    if (collision === 2) {
+      heartTwo.style.visibility = "hidden";
+    }
+    if (collision === 3) {
+      heartThree.style.visibility = "hidden";
+      youLose();
+    }
+  }
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+let enemy1 = new Enemy(-100, 58);
+let enemy2 = new Enemy(-100, 142);
+let enemy3 = new Enemy(-100, 224);
 
 Enemy.prototype.reset = function() {
   this.speed = Math.round(Math.random() * 3) + 1;
@@ -46,12 +71,43 @@ const Player = function() {
 }
 
 Player.prototype.update = function(dt) {
-
+  this.render;
+  //For reaching the water
+  if (this.y < 1) {
+    this.x = 202;
+    this.y = 375;
+    win++;
+    youWin();
+  }
 };
 
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+function youWin() {
+  if (win === 5) {
+    let winModal = document.getElementById('winModal');
+    winModal.style.display = "block";
+  }
+};
+
+//Lose the game when being hit by bugs 3 times
+function youLose() {
+  let loseModal = document.getElementById('loseModal');
+  loseModal.style.display = "block";
+}
+
+// Start Game
+function startGame() {
+  let startModal = document.getElementById('startModal');
+  startModal.style.display = "none";
+}
+
+//Restart Game
+function restartGame() {
+  window.location.reload(true);
+}
 
 Player.prototype.handleInput = function(key) {
   if (key) {
@@ -70,9 +126,7 @@ Player.prototype.handleInput = function(key) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let enemy1 = new Enemy(-100, 58);
-let enemy2 = new Enemy(-100, 142);
-let enemy3 = new Enemy(-100, 224);
+
 let allEnemies = [enemy1, enemy2, enemy3];
 
 let player = new Player(202, 375);

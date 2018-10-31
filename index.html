@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Effective JavaScript: Frogger</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 </head>
+
 <body>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+  <header>
+        <img src="images/Heart.png" id="heart1" width="50" height="75">
+        <img src="images/Heart.png" id="heart2" width="50" height="75">
+        <img src="images/Heart.png" id="heart3" width="50" height="75">
+  </header>
+  <div id="startModal">
+    <div id="startModalContent">
+      <div>Effective JavaScript: Frogger - London Radabaugh</div>
+      <p>Collect all 5 stars with 3 lives</p>
+      <p>GOOD LUCK!!!</p>
+      <button onclick="startGame()" class="btn exit">START</button>
+    </div>
+  </div>
+  </div>
+  <script src="js/resources.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/engine.js"></script>
+  <div id="winModal">
+    <div id="winModalContent">
+      <div>Yay, You've Won!</div>
+      <button onclick="restartGame()" class="btn success">Play Again?</button>
+    </div>
+  </div>
+  <div id="loseModal">
+    <div id="loseModalContent">
+      <div>Dang, You Lose!</div>
+      <button onclick="restartGame()" class="btn success">Play Again?</button>
+    </div>
+  </div>
 </body>
+<footer>Effective JavaScript: Frogger - London Radabaugh</footer>
+
 </html>
