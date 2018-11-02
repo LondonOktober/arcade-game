@@ -1,19 +1,20 @@
-Effective JavaScript: Frogger
+## Effective JavaScript: Frogger
 Welcome to my Frogger clone. Try to collect all 5 stars but be careful, you only have 3 lives!
 
-Getting started
-To start, double click index.html or run open index.html from the command line.
+### Getting started
+To start, visit https://londonoktober.github.io/arcade-game/ or double click index.html or run open index.html from the command line.
 
-Dependencies
+### Dependencies
 Base files & artwork provided by Udacity (https://github.com/udacity/frontend-nanodegree-arcade-game)
 Fredericka the Great font (https://fonts.google.com/)
 
-Sources of information
-StackOverflow (https://stackoverflow.com)
-CSSTricks (https://css-tricks.com/snippets/css/)
-MDN (https://developer.mozilla.org/en-US/)
+### Sources of information
+- StackOverflow (https://stackoverflow.com)
+- CSSTricks (https://css-tricks.com/snippets/css/)
+- MDN (https://developer.mozilla.org/en-US/)
+- LearnXinYminutes (https://learnxinyminutes.com/docs/javascript/)
 
-License
+### License
 The MIT License (MIT)
 
 Copyright (c) 2018 London Radabaugh
