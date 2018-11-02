@@ -6,7 +6,7 @@ To start, double click index.html or run open index.html from the command line.
 
 Dependencies
 Base files & artwork provided by Udacity (https://github.com/udacity/frontend-nanodegree-arcade-game)
-Fredericka the Great font (website)
+Fredericka the Great font (https://fonts.google.com/)
 
 Sources of information
 StackOverflow (https://stackoverflow.com)

@@ -1,13 +1,18 @@
 body {
   font-family: 'Permanent Marker', cursive;
   text-align: center;
+  cursor: pointer;
+}
+
+h4 {
+  text-decoration: underline;
 }
 
 #startModal {
   background-color: #4A985B;
   border: 5px dashed #3E6F3F;
   bottom: 1;
-  color: #3E6F3F;
+  color: #fff;
   height: 600px;
   left: 0;
   margin: auto;
@@ -73,6 +78,7 @@ body {
   background-color: white;
   border: 2px solid black;
   color: black;
+  cursor: pointer;
   font-family: 'Permanent Marker', cursive;
   font-size: 1em;
 }
