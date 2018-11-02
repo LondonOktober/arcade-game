@@ -5,20 +5,17 @@ let heartTwo = document.getElementById('heart2');
 let heartThree = document.getElementById('heart3');
 let win = 0;
 
-// Enemies our player must avoid
+// Enemies the player must avoid
 const Enemy = function(x, y) {
-  // Variables applied to each of our instances go here,
-  // we've provided one for you to get started
+// Variables applied to each of our instances go here
   this.speed = Math.round(Math.random() * 3) + 1;
-  // The image/sprite for our enemies, this uses
-  // a helper we've provided to easily load images
+
   this.sprite = 'images/enemy-bug.png';
   this.x = x;
   this.y = y;
 };
 
 // Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
   if (gamePaused) {
     return;
@@ -38,7 +35,7 @@ Enemy.prototype.update = function(dt) {
     collision++;
     lives();
   }
-
+  // Heart disappears when enemy/player collision happens
   function lives() {
     if (collision === 1) {
       heartOne.style.visibility = "hidden";
@@ -58,13 +55,7 @@ Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Enemy.prototype.reset = function() {
-  this.speed = Math.round(Math.random() * 3) + 1;
-};
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 const Player = function() {
   this.sprite = 'images/char-cat-girl.png';
   this.x = 202;
@@ -72,6 +63,7 @@ const Player = function() {
   this.hasTouchedStar = false;
 }
 
+//  Update and check whether player has attained a star
 Player.prototype.update = function(dt) {
   if (this.y < 1 && !this.hasTouchedStar) {
     if (this.collidedWith(star)) {
@@ -90,9 +82,10 @@ Player.prototype.update = function(dt) {
   }
 };
 
-Player.prototype.collidedWith = function(object) {
-  return (this.x < object.x + 60 &&
-    this.x + 60 > object.x &&
+// Player/Star collision and border to not go in water except for star
+Player.prototype.collidedWith = function(star) {
+  return (this.x < star.x + 60 &&
+    this.x + 60 > star.x &&
     this.y < 1);
 }
 
@@ -100,6 +93,7 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Displays Winner Modal by collecting 5 stars
 function youWin() {
   if (win === 5) {
     let winModal = document.getElementById('winModal');
@@ -108,20 +102,20 @@ function youWin() {
   }
 };
 
-//Lose the game when being hit by bugs 3 times
+// Displays Loser Modal by colliding with the enemy 3 times
 function youLose() {
   let loseModal = document.getElementById('loseModal');
   loseModal.style.display = "block";
   gamePaused = true;
 }
 
-// Start Game
+// Start Game by hiding Start Modal
 function startGame() {
   let startModal = document.getElementById('startModal');
   startModal.style.display = "none";
 }
 
-//Restart Game
+// Restart Game by reloading page
 function restartGame() {
   window.location.reload(true);
 }
@@ -144,6 +138,7 @@ Player.prototype.handleInput = function(key) {
   }
 };
 
+// Stars tha must be collected to win
 const Star = function(previousX) {
   this.sprite = 'images/Star.png';
   let newX = this.randomX();
@@ -158,10 +153,12 @@ const Star = function(previousX) {
   this.collidedWithPlayer = false;
 };
 
+// Randomize the star position
 Star.prototype.randomX = function() {
   return [-2, 99, 200, 301, 403][Math.floor(Math.random() * 5)];
 }
 
+// Randomizes star position after previous collection by player
 Star.prototype.update = function() {
   if (this.collidedWithPlayer) {
     star = new Star(this.x);
@@ -180,12 +177,12 @@ let enemy3 = new Enemy(-100, 224);
 let allEnemies = [enemy1, enemy2, enemy3];
 
 // Place the player object in a variable called player
-const player = new Player(202, 375);
+let player = new Player(202, 375);
 
 let star = new Star();
 
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method or pauses the game.
 document.addEventListener('keyup', function(e) {
   const allowedKeys = {
     32: '(space)',
@@ -195,6 +192,7 @@ document.addEventListener('keyup', function(e) {
     40: 'down'
   };
 
+// Pause/Play game allowed using space bar
   if (allowedKeys[e.keyCode] === '(space)') {
     gamePaused = !gamePaused;
   } else {
