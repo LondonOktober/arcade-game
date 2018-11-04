@@ -1,4 +1,3 @@
-let collision = 0;
 let gamePaused = false;
 let heartOne = document.getElementById('heart1');
 let heartTwo = document.getElementById('heart2');
@@ -7,12 +6,14 @@ let win = 0;
 
 // Enemies the player must avoid
 const Enemy = function(x, y) {
-// Variables applied to each of our instances go here
+  // Variables applied to each of our instances go here
   this.speed = Math.round(Math.random() * 3) + 1;
 
   this.sprite = 'images/enemy-bug.png';
   this.x = x;
   this.y = y;
+  this.height = 50;
+  this.width = 70;
 };
 
 // Update the enemy's position, required method for game
@@ -22,31 +23,13 @@ Enemy.prototype.update = function(dt) {
   }
 
   this.x = (this.x + this.speed + dt * 10) % 500;
+
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
   // Checks for collision between player and enemies
-  if (player.x < this.x + 60 &&
-    player.x + 60 > this.x &&
-    player.y < this.y + 40 &&
-    40 + player.y > this.y) {
-    player.x = 202;
-    player.y = 375;
-    collision++;
-    lives();
-  }
-  // Heart disappears when enemy/player collision happens
-  function lives() {
-    if (collision === 1) {
-      heartOne.style.visibility = "hidden";
-    }
-    if (collision === 2) {
-      heartTwo.style.visibility = "hidden";
-    }
-    if (collision === 3) {
-      heartThree.style.visibility = "hidden";
-      youLose();
-    }
+  if (player.x < this.x + this.width && player.x + this.width > this.x && player.y < this.y + this.height && player.y + player.height > this.y) {
+    player.collidedWithEnemy();
   }
 };
 
@@ -59,9 +42,33 @@ Enemy.prototype.render = function() {
 const Player = function() {
   this.sprite = 'images/char-cat-girl.png';
   this.x = 202;
-  this.y = 375;
+  this.y = 400;
+  this.height = 60;
+  this.width = 50;
   this.hasTouchedStar = false;
-}
+  this.collisions = 0;
+};
+
+// Heart disappears when enemy/player collision happens
+Player.prototype.collidedWithEnemy = function() {
+  this.x = 202;
+  this.y = 400;
+  this.collisions += 1;
+  this.updateLives();
+};
+
+Player.prototype.updateLives = function() {
+  if (this.collisions === 1) {
+    heartOne.style.visibility = "hidden";
+  }
+  if (this.collisions === 2) {
+    heartTwo.style.visibility = "hidden";
+  }
+  if (this.collisions === 3) {
+    heartThree.style.visibility = "hidden";
+    youLose();
+  }
+};
 
 //  Update and check whether player has attained a star
 Player.prototype.update = function(dt) {
@@ -73,7 +80,7 @@ Player.prototype.update = function(dt) {
       youWin();
       setTimeout(() => {
         this.x = 202;
-        this.y = 375;
+        this.y = 400;
         this.hasTouchedStar = false;
       }, 100);
     } else {
@@ -128,11 +135,11 @@ Player.prototype.handleInput = function(key) {
   if (key) {
     if (key == 'left' && this.x > 0) {
       this.x -= 101;
-    } else if (key == 'right' && this.x < 375) {
+    } else if (key == 'right' && this.x < 400) {
       this.x += 101;
     } else if (key == 'up' && this.y > 0) {
       this.y -= 86;
-    } else if (key == 'down' && this.y < 375) {
+    } else if (key == 'down' && this.y < 400) {
       this.y += 86;
     }
   }
@@ -177,7 +184,7 @@ let enemy3 = new Enemy(-100, 224);
 let allEnemies = [enemy1, enemy2, enemy3];
 
 // Place the player object in a variable called player
-let player = new Player(202, 375);
+let player = new Player(202, 400);
 
 let star = new Star();
 
@@ -192,7 +199,7 @@ document.addEventListener('keyup', function(e) {
     40: 'down'
   };
 
-// Pause/Play game allowed using space bar
+  // Pause/Play game allowed using space bar
   if (allowedKeys[e.keyCode] === '(space)') {
     gamePaused = !gamePaused;
   } else {

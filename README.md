@@ -2,7 +2,7 @@
 Welcome to my Frogger clone. Try to collect all 5 stars but be careful, you only have 3 lives!
 
 ### Getting started
-To start, visit https://londonoktober.github.io/arcade-game/ or double click index.html or run open index.html from the command line.
+To start, visit https://londonoktober.github.io/arcade-game/ or double click `index.html` or run open `index.html` from the command line.
 
 ### Dependencies
 Base files & artwork provided by Udacity (https://github.com/udacity/frontend-nanodegree-arcade-game)
